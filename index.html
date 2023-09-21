@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="wheel">
+        <div class="spinner"></div>
+        <div class="inner-wheel">
+          <div class="section"><span>Section 1</span></div>
+          <div class="section"><span>Section 2</span></div>
+          <div class="section"><span>Section 3</span></div>
+          <div class="section"><span>Section 4</span></div>
+          <div class="section"><span>Section 5</span></div>
+          <div class="section"><span>Section 6</span></div>
+        </div>
+      </div>
+      
+      <button id="spin-btn">SPIN</button>
+   <script>
+       const wheel = document.querySelector('.inner-wheel');
+const spinBtn = document.querySelector('#spin-btn');
+let deg = 0;
+
+spinBtn.addEventListener('click', () => {
+  spinBtn.disabled = true;
+  deg = Math.floor(5000 + Math.random() * 5000);
+  wheel.style.transform = `rotate(${deg}deg)`;
+  wheel.classList.add('blur');
+});
+
+wheel.addEventListener('transitionend', () => {
+  wheel.classList.remove('blur');
+  spinBtn.disabled = false;
+  const currentSection = Math.floor((360 - (deg % 360)) / 60);
+  console.log(`You won section ${currentSection}`);
+});
+
+   </script>   
+</body>
+</html>
